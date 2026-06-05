@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vikingo's Barber Shop — Russellville, AR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal:     #111111;
+      --charcoal-mid: #1A1A1A;
+      --charcoal-card:#212121;
+      --charcoal-bdr: #2E2E2E;
+      --gold:         #C9A84C;
+      --gold-light:   #DEC06E;
+      --gold-dim:     rgba(201,168,76,0.12);
+      --cream:        #F2EDD7;
+      --text:         #C8C4B8;
+      --muted:        #787068;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--charcoal);
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      background: rgba(17,17,17,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,168,76,0.18);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .nav-brand img { height: 42px; width: 42px; object-fit: contain; }
+
+    .nav-brand-text {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.66rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      cursor: pointer;
+      transition: color 0.25s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--gold); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .lang-toggle {
+      display: flex;
+      border: 1px solid var(--charcoal-bdr);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .lang-btn {
+      padding: 0.28rem 0.65rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.22s;
+    }
+
+    .lang-btn.active {
+      background: var(--gold);
+      color: var(--charcoal);
+    }
+
+    .nav-phone {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ── PAGE ROUTING ── */
+    .page { display: none; min-height: 100vh; }
+    .page.active { display: block; }
+
+    /* ── UTILITIES ── */
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.9rem;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.18;
+      margin-bottom: 1.25rem;
+    }
+
+    .gold-bar {
+      width: 52px; height: 1px;
+      background: var(--gold);
+      margin: 1.5rem 0;
+    }
+
+    .gold-bar.center { margin: 1.25rem auto; }
+
+    .diamond-rule {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0.5rem 0 3rem;
+      color: var(--gold);
+      font-size: 0.55rem;
+    }
+
+    .diamond-rule::before,
+    .diamond-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.25;
+    }
+
+    .btn-gold {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.95rem 2.4rem;
+      background: var(--gold);
+      color: var(--charcoal);
+      border: none;
+      cursor: pointer;
+      transition: all 0.28s ease;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(201,168,76,0.28);
+    }
+
+    .btn-outline-gold {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.95rem 2.4rem;
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      cursor: pointer;
+      transition: all 0.28s ease;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .btn-outline-gold:hover {
+      background: var(--gold-dim);
+      transform: translateY(-2px);
+    }
+
+    .btn-dark {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.95rem 2.4rem;
+      background: var(--charcoal);
+      color: var(--gold);
+      border: none;
+      cursor: pointer;
+      transition: all 0.28s ease;
+      display: inline-block;
+    }
+
+    .btn-dark:hover {
+      background: #1e1e1e;
+      transform: translateY(-2px);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+
+    /* ══════════════════════════════
+       HOME
+    ══════════════════════════════ */
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7rem 2rem 4rem;
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.07) 0%, transparent 70%),
+        var(--charcoal);
+    }
+
+    /* thin gold top line */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 68px; left: 50%;
+      transform: translateX(-50%);
+      width: 1px; height: 70px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    .hero-logo {
+      width: 155px;
+      height: 155px;
+      object-fit: contain;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 1s 0.1s both, pulse 4s 1.2s ease-in-out infinite;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%,100% { filter: drop-shadow(0 0 18px rgba(201,168,76,0.22)); }
+      50%      { filter: drop-shadow(0 0 38px rgba(201,168,76,0.44)); }
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+      animation: fadeUp 1s 0.25s both;
+    }
+
+    .hero-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      font-weight: 900;
+      color: var(--cream);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      animation: fadeUp 1s 0.35s both;
+    }
+
+    .hero-sub {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.85rem, 2vw, 1.15rem);
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      margin: 0.5rem 0 0.6rem;
+      animation: fadeUp 1s 0.45s both;
+    }
+
+    .hero-tagline {
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      margin-bottom: 2.8rem;
+      animation: fadeUp 1s 0.55s both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 1s 0.65s both;
+    }
+
+    /* About */
+    .about {
+      background: var(--charcoal-mid);
+      border-top: 1px solid rgba(201,168,76,0.12);
+      border-bottom: 1px solid rgba(201,168,76,0.12);
+      padding: 5.5rem 2.5rem;
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-photo-wrap {
+      position: relative;
+    }
+
+    .about-photo-wrap img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: brightness(0.88) saturate(0.9);
+    }
+
+    /* offset gold border frame */
+    .about-photo-wrap::before {
+      content: '';
+      position: absolute;
+      top: -14px; left: -14px;
+      right: 14px; bottom: 14px;
+      border: 1px solid rgba(201,168,76,0.5);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .about-body .eyebrow { margin-bottom: 0.6rem; }
+
+    .about-p {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--charcoal-bdr);
+    }
+
+    .stat-num {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-lbl {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Services preview */
+    .svc-preview {
+      padding: 6rem 2.5rem;
+    }
+
+    .svc-preview-hd {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .svc-preview-hd .eyebrow { display: block; text-align: center; }
+    .svc-preview-hd .section-title { text-align: center; }
+
+    .svc-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--charcoal-bdr);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .svc-card {
+      background: var(--charcoal-mid);
+      padding: 2.5rem;
+      text-align: center;
+      border-bottom: 2px solid transparent;
+      transition: all 0.28s;
+    }
+
+    .svc-card:hover {
+      background: var(--charcoal-card);
+      border-bottom-color: var(--gold);
+    }
+
+    .svc-icon {
+      font-size: 1.75rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .svc-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--cream);
+      text-transform: uppercase;
+      margin-bottom: 0.65rem;
+    }
+
+    .svc-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* CTA Banner */
+    .cta-banner {
+      background: var(--gold);
+      padding: 4.5rem 2.5rem;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-sub {
+      font-size: 0.88rem;
+      color: rgba(17,17,17,0.65);
+      margin-bottom: 2rem;
+    }
+
+    /* ══════════════════════════════
+       SERVICES PAGE
+    ══════════════════════════════ */
+
+    .page-hero {
+      padding: 10rem 2.5rem 3.5rem;
+      text-align: center;
+      background: radial-gradient(ellipse 80% 50% at 50% -5%, rgba(201,168,76,0.06) 0%, transparent 65%);
+    }
+
+    .page-hero .section-title { text-align: center; }
+
+    .svc-grid {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 0 2.5rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1px;
+      background: var(--charcoal-bdr);
+    }
+
+    .svc-full-card {
+      background: var(--charcoal-mid);
+      padding: 2.4rem;
+      border-bottom: 2px solid transparent;
+      transition: all 0.28s;
+    }
+
+    .svc-full-card:hover {
+      background: var(--charcoal-card);
+      border-bottom-color: var(--gold);
+    }
+
+    .svc-full-icon { font-size: 1.4rem; display: block; margin-bottom: 0.9rem; }
+
+    .svc-full-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+
+    .svc-full-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .svc-price {
+      font-family: 'Cinzel', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .svc-price small {
+      font-size: 0.68rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-left: 0.3rem;
+    }
+
+    .svc-note {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 1.5rem 2.5rem 3rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* ══════════════════════════════
+       PHOTOS PAGE
+    ══════════════════════════════ */
+
+    .gallery {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+      columns: 3;
+      column-gap: 6px;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 6px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.55s ease, filter 0.35s ease;
+      filter: brightness(0.88);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.04);
+      filter: brightness(1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(17,17,17,0);
+      transition: background 0.35s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      background: rgba(17,17,17,0.35);
+    }
+
+    .gallery-zoom {
+      font-size: 1.4rem;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 0.28s;
+    }
+
+    .gallery-item:hover .gallery-zoom {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.93);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 88vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      font-size: 1.8rem;
+      color: var(--gold);
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+
+    /* ══════════════════════════════
+       CONTACT PAGE
+    ══════════════════════════════ */
+
+    .contact-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2.5rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 5rem;
+    }
+
+    .ci-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.45rem;
+    }
+
+    .ci-val {
+      font-size: 0.92rem;
+      color: var(--cream);
+      margin-bottom: 1.75rem;
+      line-height: 1.6;
+    }
+
+    .ci-val a {
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .ci-val a:hover { color: var(--gold); }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .hours-table tr {
+      border-bottom: 1px solid var(--charcoal-bdr);
+    }
+
+    .hours-table td {
+      padding: 0.55rem 0;
+      font-size: 0.84rem;
+      color: var(--text);
+    }
+
+    .hours-table td:last-child {
+      text-align: right;
+      color: var(--muted);
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.45);
+      padding: 0.5rem 1.1rem;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .social-link:hover {
+      background: var(--gold);
+      color: var(--charcoal);
+      border-color: var(--gold);
+    }
+
+    /* Form */
+    .booking-form {
+      background: var(--charcoal-mid);
+      border: 1px solid var(--charcoal-bdr);
+      padding: 2.5rem;
+    }
+
+    .form-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 2rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group { margin-bottom: 1.15rem; }
+
+    .form-label {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.45rem;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      background: var(--charcoal);
+      border: 1px solid var(--charcoal-bdr);
+      color: var(--cream);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      padding: 0.72rem 0.9rem;
+      outline: none;
+      transition: border-color 0.25s;
+      appearance: none;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus { border-color: var(--gold); }
+
+    .form-select option { background: var(--charcoal); }
+
+    .form-textarea { resize: vertical; min-height: 95px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--gold);
+      color: var(--charcoal);
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.28s;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover {
+      background: var(--gold-light);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal-mid);
+      border-top: 1px solid rgba(201,168,76,0.12);
+      padding: 2.5rem;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-text {
+      font-size: 0.74rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-inner { grid-template-columns: 1fr; }
+      .about-photo-wrap { display: none; }
+      .svc-cards { grid-template-columns: 1fr; }
+      .contact-body { grid-template-columns: 1fr; gap: 3rem; }
+      .gallery { columns: 2; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .nav-phone { display: none; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.58rem; }
+      .gallery { columns: 2; }
+      .svc-grid { padding: 0 1.25rem 3rem; }
+      .contact-body { padding: 0 1.25rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <div class="nav-brand" onclick="goTo('home')">
+    <img src="./assets/logo.png" alt="Vikingo's">
+    <div class="nav-brand-text">Vikingo's<br>Barber Shop</div>
+  </div>
+
+  <ul class="nav-links">
+    <li><a onclick="goTo('home')"     id="nl-home"     class="active" data-key="nav_home">Home</a></li>
+    <li><a onclick="goTo('services')" id="nl-services"             data-key="nav_services">Services</a></li>
+    <li><a onclick="goTo('photos')"   id="nl-photos"               data-key="nav_photos">Photos</a></li>
+    <li><a onclick="goTo('contact')"  id="nl-contact"              data-key="nav_contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn"        id="btn-es" onclick="setLang('es')">ES</button>
+    </div>
+    <a href="tel:+14796929675" class="nav-phone">(479) 692-9675</a>
+  </div>
+</nav>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <img src="./assets/logo.png" alt="Vikingo's Barber Shop" class="hero-logo">
+    <span class="hero-eyebrow" data-key="hero_eyebrow">Russellville, Arkansas</span>
+    <h1 class="hero-name">VIKINGO'S</h1>
+    <p class="hero-sub" data-key="hero_sub">Barber Shop</p>
+    <p class="hero-tagline" data-key="hero_tagline">306 S Arkansas Ave &nbsp;·&nbsp; Style and Quality</p>
+    <div class="hero-btns">
+      <button class="btn-gold"         onclick="goTo('contact')"  data-key="hero_cta">Book an Appointment</button>
+      <button class="btn-outline-gold" onclick="goTo('services')" data-key="hero_view">View Services</button>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="about-inner container">
+      <div class="about-photo-wrap reveal">
+        <img src="./assets/haircut2.jpeg" alt="Vikingo's barber at work">
+      </div>
+      <div class="about-body">
+        <span class="eyebrow" data-key="about_eyebrow">About the Shop</span>
+        <h2 class="section-title" data-key="about_title">Precision Cuts.<br>Every Time.</h2>
+        <div class="gold-bar"></div>
+        <p class="about-p reveal" data-key="about_p1">At Vikingo's Barber Shop, we believe a great haircut is more than a service — it's a statement. Our barbers bring skill, attention to detail, and a passion for the craft to every client who sits in our chair.</p>
+        <p class="about-p reveal d1" data-key="about_p2">From sharp fades to custom designs, beard work to straight razor shaves — we've got you covered. Walk-ins welcome, appointments preferred.</p>
+        <div class="about-stats reveal d2">
+          <div>
+            <div class="stat-num">7</div>
+            <div class="stat-lbl" data-key="stat1">Days a Week</div>
+          </div>
+          <div>
+            <div class="stat-num">✓</div>
+            <div class="stat-lbl" data-key="stat2">Walk-ins Welcome</div>
+          </div>
+          <div>
+            <div class="stat-num">100%</div>
+            <div class="stat-lbl" data-key="stat3">Satisfaction</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-preview">
+    <div class="svc-preview-hd">
+      <span class="eyebrow" data-key="svc_eyebrow">What We Do</span>
+      <h2 class="section-title" data-key="svc_title">Our Services</h2>
+      <div class="diamond-rule"><span>◆</span></div>
+    </div>
+    <div class="svc-cards container">
+      <div class="svc-card reveal">
+        <span class="svc-icon">✂️</span>
+        <div class="svc-name" data-key="p_svc1">Haircuts & Fades</div>
+        <p class="svc-desc" data-key="p_svc1_d">Classic cuts, tapers, skin fades — crafted to fit your style perfectly.</p>
+      </div>
+      <div class="svc-card reveal d1">
+        <span class="svc-icon">🪒</span>
+        <div class="svc-name" data-key="p_svc2">Beard & Shaves</div>
+        <p class="svc-desc" data-key="p_svc2_d">Precision beard shaping and traditional straight razor shaves for the refined man.</p>
+      </div>
+      <div class="svc-card reveal d2">
+        <span class="svc-icon">⚡</span>
+        <div class="svc-name" data-key="p_svc3">Custom Designs</div>
+        <p class="svc-desc" data-key="p_svc3_d">Unique line art and hair designs that turn your cut into a personal signature.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <h2 class="cta-title" data-key="cta_title">Walk-ins Welcome. Appointments Preferred.</h2>
+    <p class="cta-sub" data-key="cta_sub">Open 7 days a week · 306 S Arkansas Ave, Russellville, AR</p>
+    <button class="btn-dark" onclick="goTo('contact')" data-key="cta_btn">Book Now</button>
+  </section>
+
+</div>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<div class="page" id="page-services">
+
+  <section class="page-hero">
+    <span class="eyebrow" data-key="nav_services">Services</span>
+    <h1 class="section-title" data-key="svc_page_title">Our Services</h1>
+    <div class="gold-bar center"></div>
+    <p style="color:var(--muted);font-size:0.88rem;" data-key="svc_page_sub">Quality craftsmanship at every price point</p>
+  </section>
+
+  <div class="svc-grid">
+    <div class="svc-full-card reveal">
+      <span class="svc-full-icon">✂️</span>
+      <div class="svc-full-name" data-key="s1_n">Men's Haircut</div>
+      <p class="svc-full-desc" data-key="s1_d">Classic cut with clippers or scissors, includes a clean-up and styling.</p>
+      <div class="svc-price">$25 <small data-key="s_up">and up</small></div>
+    </div>
+    <div class="svc-full-card reveal d1">
+      <span class="svc-full-icon">💈</span>
+      <div class="svc-full-name" data-key="s2_n">Fade</div>
+      <p class="svc-full-desc" data-key="s2_d">Skin fade, low fade, mid fade, or high fade — razor sharp and seamless.</p>
+      <div class="svc-price">$30 <small data-key="s_up">and up</small></div>
+    </div>
+    <div class="svc-full-card reveal d2">
+      <span class="svc-full-icon">👦</span>
+      <div class="svc-full-name" data-key="s3_n">Kids' Haircut</div>
+      <p class="svc-full-desc" data-key="s3_d">Patient and skilled cuts for kids of all ages. They'll love the result.</p>
+      <div class="svc-price">$20 <small data-key="s_up">and up</small></div>
+    </div>
+    <div class="svc-full-card reveal">
+      <span class="svc-full-icon">🪒</span>
+      <div class="svc-full-name" data-key="s4_n">Beard Trim</div>
+      <p class="svc-full-desc" data-key="s4_d">Shape, define, and clean up your beard for a polished, well-groomed look.</p>
+      <div class="svc-price">$20 <small data-key="s_up">and up</small></div>
+    </div>
+    <div class="svc-full-card reveal d1">
+      <span class="svc-full-icon">⚗️</span>
+      <div class="svc-full-name" data-key="s5_n">Straight Razor Shave</div>
+      <p class="svc-full-desc" data-key="s5_d">The classic barbershop experience — hot towel, straight razor, smooth finish.</p>
+      <div class="svc-price">$35 <small data-key="s_up">and up</small></div>
+    </div>
+    <div class="svc-full-card reveal d2">
+      <span class="svc-full-icon">✨</span>
+      <div class="svc-full-name" data-key="s6_n">Cut + Beard Combo</div>
+      <p class="svc-full-desc" data-key="s6_d">The full treatment — haircut and beard service bundled together and discounted.</p>
+      <div class="svc-price">$40 <small data-key="s_up">and up</small></div>
+    </div>
+    <div class="svc-full-card reveal">
+      <span class="svc-full-icon">⚡</span>
+      <div class="svc-full-name" data-key="s7_n">Custom Design / Line Art</div>
+      <p class="svc-full-desc" data-key="s7_d">Artistic line work and custom designs added to any cut.</p>
+      <div class="svc-price">$10 <small data-key="s_addon">add-on</small></div>
+    </div>
+  </div>
+
+  <p class="svc-note reveal" data-key="svc_note">* Prices are starting rates and may vary based on hair length and style. Contact us for a quote.</p>
+
+  <section class="cta-banner">
+    <h2 class="cta-title" data-key="cta_title">Walk-ins Welcome. Appointments Preferred.</h2>
+    <p class="cta-sub" data-key="cta_sub">Open 7 days a week · 306 S Arkansas Ave, Russellville, AR</p>
+    <button class="btn-dark" onclick="goTo('contact')" data-key="cta_btn">Book Now</button>
+  </section>
+
+</div>
+
+<!-- ═══════════ PHOTOS ═══════════ -->
+<div class="page" id="page-photos">
+
+  <section class="page-hero">
+    <span class="eyebrow" data-key="photos_eyebrow">Our Work</span>
+    <h1 class="section-title" data-key="photos_title">The Gallery</h1>
+    <div class="gold-bar center"></div>
+    <p style="color:var(--muted);font-size:0.88rem;" data-key="photos_sub">Every cut tells a story</p>
+  </section>
+
+  <div class="gallery">
+    <div class="gallery-item" onclick="openLb('./assets/haircut2.jpeg')">
+      <img src="./assets/haircut2.jpeg" alt="Barber at work">
+      <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLb('./assets/haircut6.jpeg')">
+      <img src="./assets/haircut6.jpeg" alt="Fade haircut">
+      <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLb('./assets/haircut4.jpeg')">
+      <img src="./assets/haircut4.jpeg" alt="Pompadour fade">
+      <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLb('./assets/haircut3.jpeg')">
+      <img src="./assets/haircut3.jpeg" alt="Fade with design">
+      <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLb('./assets/haircut 5.jpeg')">
+      <img src="./assets/haircut 5.jpeg" alt="Textured fade">
+      <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLb('./assets/haircut.jpeg')">
+      <img src="./assets/haircut.jpeg" alt="Custom design cut">
+      <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLb()">
+  <button class="lb-close" onclick="closeLb()">✕</button>
+  <img class="lightbox-img" id="lb-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<div class="page" id="page-contact">
+
+  <section class="page-hero">
+    <span class="eyebrow" data-key="contact_eyebrow">Get In Touch</span>
+    <h1 class="section-title" data-key="contact_title">Contact & Booking</h1>
+    <div class="gold-bar center"></div>
+    <p style="color:var(--muted);font-size:0.88rem;" data-key="contact_sub">We'd love to have you in the chair</p>
+  </section>
+
+  <div class="contact-body">
+
+    <!-- Left: Info -->
+    <div>
+      <div class="reveal">
+        <span class="ci-label" data-key="ci_addr">Address</span>
+        <p class="ci-val">306 S Arkansas Ave<br>Russellville, AR 72801</p>
+      </div>
+      <div class="reveal d1">
+        <span class="ci-label" data-key="ci_phone">Phone</span>
+        <p class="ci-val"><a href="tel:+14796929675">(479) 692-9675</a></p>
+      </div>
+      <div class="reveal d1">
+        <span class="ci-label" data-key="ci_email">Email</span>
+        <p class="ci-val"><a href="mailto:info@vikingosbarber.com">info@vikingosbarber.com</a></p>
+      </div>
+      <div class="reveal d2">
+        <span class="ci-label" data-key="ci_hours">Hours</span>
+        <table class="hours-table">
+          <tr><td data-key="d_mon">Monday</td>   <td>9:00 AM – 8:00 PM</td></tr>
+          <tr><td data-key="d_tue">Tuesday</td>  <td>9:00 AM – 8:00 PM</td></tr>
+          <tr><td data-key="d_wed">Wednesday</td><td>9:00 AM – 8:00 PM</td></tr>
+          <tr><td data-key="d_thu">Thursday</td> <td>9:00 AM – 8:00 PM</td></tr>
+          <tr><td data-key="d_fri">Friday</td>   <td>9:00 AM – 9:00 PM</td></tr>
+          <tr><td data-key="d_sat">Saturday</td> <td>9:00 AM – 9:00 PM</td></tr>
+          <tr><td data-key="d_sun">Sunday</td>   <td>9:00 AM – 8:00 PM</td></tr>
+        </table>
+      </div>
+      <div class="reveal d3" style="margin-top:1.75rem;">
+        <span class="ci-label" data-key="ci_social">Follow Us</span>
+        <a href="https://www.facebook.com/profile.php?id=61578067344121" target="_blank" class="social-link" data-key="fb_lbl">📘 Facebook</a>
+      </div>
+    </div>
+
+    <!-- Right: Form -->
+    <div class="booking-form reveal">
+      <h3 class="form-title" data-key="form_title">Request an Appointment</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" data-key="f_name">Full Name</label>
+          <input type="text" class="form-input" id="f-name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-key="f_phone">Phone Number</label>
+          <input type="tel" class="form-input" id="f-phone">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" data-key="f_service">Service</label>
+        <select class="form-select" id="f-service">
+          <option value=""   data-key="f_select">Select a service…</option>
+          <option value="cut"   data-key="s1_n">Men's Haircut — $25+</option>
+          <option value="fade"  data-key="s2_n">Fade — $30+</option>
+          <option value="kids"  data-key="s3_n">Kids' Haircut — $20+</option>
+          <option value="beard" data-key="s4_n">Beard Trim — $20+</option>
+          <option value="shave" data-key="s5_n">Straight Razor Shave — $35+</option>
+          <option value="combo" data-key="s6_n">Cut + Beard Combo — $40+</option>
+          <option value="design" data-key="s7_n">Custom Design — $10+</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" data-key="f_date">Preferred Date</label>
+          <input type="date" class="form-input" id="f-date">
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-key="f_time">Preferred Time</label>
+          <input type="time" class="form-input" id="f-time">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" data-key="f_notes">Notes (optional)</label>
+        <textarea class="form-textarea" id="f-notes"></textarea>
+      </div>
+
+      <button class="form-submit" onclick="submitForm()" data-key="f_submit">Send Request</button>
+
+      <div class="form-success" id="form-success">
+        <p data-key="f_success">✓ &nbsp;Request received! We'll be in touch shortly.</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-brand">Vikingo's Barber Shop</div>
+  <p class="footer-text">306 S Arkansas Ave, Russellville, AR 72801 &nbsp;·&nbsp; (479) 692-9675</p>
+  <p class="footer-text" style="margin-top:0.4rem;" data-key="footer_copy">© 2025 Vikingo's Barber Shop. All rights reserved.</p>
+</footer>
+
+<script>
+// ── TRANSLATIONS ──────────────────────────────────────────────
+const T = {
+  en: {
+    nav_home:"Home", nav_services:"Services", nav_photos:"Photos", nav_contact:"Contact",
+    hero_eyebrow:"Russellville, Arkansas",
+    hero_sub:"Barber Shop",
+    hero_tagline:"306 S Arkansas Ave · Style and Quality",
+    hero_cta:"Book an Appointment", hero_view:"View Services",
+    about_eyebrow:"About the Shop",
+    about_title:"Precision Cuts.\nEvery Time.",
+    about_p1:"At Vikingo's Barber Shop, we believe a great haircut is more than a service — it's a statement. Our barbers bring skill, attention to detail, and a passion for the craft to every client who sits in our chair.",
+    about_p2:"From sharp fades to custom designs, beard work to straight razor shaves — we've got you covered. Walk-ins welcome, appointments preferred.",
+    stat1:"Days a Week", stat2:"Walk-ins Welcome", stat3:"Satisfaction",
+    svc_eyebrow:"What We Do", svc_title:"Our Services",
+    p_svc1:"Haircuts & Fades", p_svc1_d:"Classic cuts, tapers, skin fades — crafted to fit your style perfectly.",
+    p_svc2:"Beard & Shaves",   p_svc2_d:"Precision beard shaping and traditional straight razor shaves for the refined man.",
+    p_svc3:"Custom Designs",   p_svc3_d:"Unique line art and hair designs that turn your cut into a personal signature.",
+    cta_title:"Walk-ins Welcome. Appointments Preferred.",
+    cta_sub:"Open 7 days a week · 306 S Arkansas Ave, Russellville, AR",
+    cta_btn:"Book Now",
+    svc_page_title:"Our Services", svc_page_sub:"Quality craftsmanship at every price point",
+    s1_n:"Men's Haircut",        s1_d:"Classic cut with clippers or scissors, includes a clean-up and styling.",
+    s2_n:"Fade",                 s2_d:"Skin fade, low fade, mid fade, or high fade — razor sharp and seamless.",
+    s3_n:"Kids' Haircut",        s3_d:"Patient and skilled cuts for kids of all ages. They'll love the result.",
+    s4_n:"Beard Trim",           s4_d:"Shape, define, and clean up your beard for a polished, well-groomed look.",
+    s5_n:"Straight Razor Shave", s5_d:"The classic barbershop experience — hot towel, straight razor, smooth finish.",
+    s6_n:"Cut + Beard Combo",    s6_d:"The full treatment — haircut and beard service bundled together and discounted.",
+    s7_n:"Custom Design / Line Art", s7_d:"Artistic line work and custom designs added to any cut.",
+    s_up:"and up", s_addon:"add-on",
+    svc_note:"* Prices are starting rates and may vary based on hair length and style. Contact us for a quote.",
+    photos_eyebrow:"Our Work", photos_title:"The Gallery", photos_sub:"Every cut tells a story",
+    contact_eyebrow:"Get In Touch", contact_title:"Contact & Booking", contact_sub:"We'd love to have you in the chair",
+    ci_addr:"Address", ci_phone:"Phone", ci_email:"Email", ci_hours:"Hours", ci_social:"Follow Us",
+    d_mon:"Monday", d_tue:"Tuesday", d_wed:"Wednesday", d_thu:"Thursday",
+    d_fri:"Friday", d_sat:"Saturday", d_sun:"Sunday",
+    fb_lbl:"📘 Facebook",
+    form_title:"Request an Appointment",
+    f_name:"Full Name", f_phone:"Phone Number", f_service:"Service",
+    f_select:"Select a service…", f_date:"Preferred Date", f_time:"Preferred Time",
+    f_notes:"Notes (optional)", f_submit:"Send Request",
+    f_success:"✓  Request received! We'll be in touch shortly.",
+    footer_copy:"© 2025 Vikingo's Barber Shop. All rights reserved.",
+  },
+  es: {
+    nav_home:"Inicio", nav_services:"Servicios", nav_photos:"Fotos", nav_contact:"Contacto",
+    hero_eyebrow:"Russellville, Arkansas",
+    hero_sub:"Barbería",
+    hero_tagline:"306 S Arkansas Ave · Estilo y Calidad",
+    hero_cta:"Reservar una Cita", hero_view:"Ver Servicios",
+    about_eyebrow:"Sobre Nosotros",
+    about_title:"Cortes de Precisión.\nSiempre.",
+    about_p1:"En Vikingo's Barber Shop creemos que un buen corte es más que un servicio — es una declaración. Nuestros barberos aportan habilidad, atención al detalle y pasión a cada cliente que se sienta en nuestra silla.",
+    about_p2:"Desde fades perfectos hasta diseños personalizados, trabajo en barba y afeitados con navaja — te tenemos cubierto. Se aceptan sin cita, aunque se prefieren reservas.",
+    stat1:"Días a la Semana", stat2:"Sin Cita Bienvenido", stat3:"Satisfacción",
+    svc_eyebrow:"Lo Que Hacemos", svc_title:"Nuestros Servicios",
+    p_svc1:"Cortes & Fades",     p_svc1_d:"Cortes clásicos, tapers, skin fades — diseñados para tu estilo.",
+    p_svc2:"Barba & Afeitado",   p_svc2_d:"Perfilado de barba y afeitados tradicionales con navaja para el hombre refinado.",
+    p_svc3:"Diseños Personalizados", p_svc3_d:"Arte en línea y diseños únicos que convierten tu corte en una firma personal.",
+    cta_title:"Sin Cita Bienvenido. Con Cita Preferido.",
+    cta_sub:"Abierto 7 días a la semana · 306 S Arkansas Ave, Russellville, AR",
+    cta_btn:"Reservar Ahora",
+    svc_page_title:"Nuestros Servicios", svc_page_sub:"Calidad artesanal en cada precio",
+    s1_n:"Corte de Caballero",   s1_d:"Corte clásico con máquina o tijera, incluye limpieza y peinado.",
+    s2_n:"Fade",                 s2_d:"Skin fade, low fade, mid fade o high fade — preciso y perfecto.",
+    s3_n:"Corte de Niños",       s3_d:"Cortes pacientes y hábiles para niños de todas las edades.",
+    s4_n:"Recorte de Barba",     s4_d:"Define, moldea y limpia tu barba para un look pulido y bien cuidado.",
+    s5_n:"Afeitado con Navaja",  s5_d:"La experiencia clásica — toalla caliente, navaja, acabado suave.",
+    s6_n:"Combo Corte + Barba",  s6_d:"El tratamiento completo — corte y servicio de barba juntos con descuento.",
+    s7_n:"Diseño / Arte en Línea", s7_d:"Diseños artísticos y arte en línea añadidos a cualquier corte.",
+    s_up:"desde", s_addon:"adicional",
+    svc_note:"* Los precios indicados son tarifas iniciales y pueden variar según la longitud y el estilo del cabello.",
+    photos_eyebrow:"Nuestro Trabajo", photos_title:"La Galería", photos_sub:"Cada corte cuenta una historia",
+    contact_eyebrow:"Contáctanos", contact_title:"Contacto y Citas", contact_sub:"Nos encantaría tenerte en la silla",
+    ci_addr:"Dirección", ci_phone:"Teléfono", ci_email:"Correo", ci_hours:"Horario", ci_social:"Síguenos",
+    d_mon:"Lunes", d_tue:"Martes", d_wed:"Miércoles", d_thu:"Jueves",
+    d_fri:"Viernes", d_sat:"Sábado", d_sun:"Domingo",
+    fb_lbl:"📘 Facebook",
+    form_title:"Solicitar una Cita",
+    f_name:"Nombre Completo", f_phone:"Número de Teléfono", f_service:"Servicio",
+    f_select:"Selecciona un servicio…", f_date:"Fecha Preferida", f_time:"Hora Preferida",
+    f_notes:"Notas (opcional)", f_submit:"Enviar Solicitud",
+    f_success:"✓  ¡Solicitud recibida! Nos pondremos en contacto pronto.",
+    footer_copy:"© 2025 Vikingo's Barber Shop. Todos los derechos reservados.",
+  }
+};
+
+let lang = 'en';
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.getElementById('btn-es').classList.toggle('active', l === 'es');
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const v = T[l][el.dataset.key];
+    if (v !== undefined) el.textContent = v;
+  });
+}
+
+// ── PAGE NAVIGATION ───────────────────────────────────────────
+function goTo(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const pg = document.getElementById('page-' + name);
+  const nl = document.getElementById('nl-' + name);
+  if (pg) pg.classList.add('active');
+  if (nl) nl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  setLang(lang); // re-apply translations to newly visible page
+  setTimeout(initReveal, 60);
+}
+
+// ── SCROLL REVEAL ─────────────────────────────────────────────
+function initReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.page.active .reveal').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      el.classList.add('visible');
+    } else {
+      obs.observe(el);
+    }
+  });
+}
+
+// ── LIGHTBOX ──────────────────────────────────────────────────
+function openLb(src) {
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLb() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── FORM ──────────────────────────────────────────────────────
+function submitForm() {
+  const name    = document.getElementById('f-name').value.trim();
+  const phone   = document.getElementById('f-phone').value.trim();
+  const service = document.getElementById('f-service').value;
+  if (!name || !phone || !service) {
+    alert(lang === 'en' ? 'Please fill in your name, phone, and service.' : 'Por favor complete su nombre, teléfono y servicio.');
+    return;
+  }
+  document.querySelector('.booking-form .form-submit').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+  const v = T[lang]['f_success'];
+  document.getElementById('form-success').querySelector('[data-key="f_success"]').textContent = v;
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  setLang('en');
+  initReveal();
+});
+
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', e => e.preventDefault());
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+VIKINGO'S BARBER SHOP — Client Intake
+======================================
+
+THE BUSINESS
+1. Location (city/state or full address): 306 S Arkansas Ave, Russellville, AR 72801
+
+2. Hours:Friday
+9 AM–9 PM
+
+Saturday
+9 AM–9 PM
+
+Sunday
+9 AM–8 PM
+
+Monday
+9 AM–8 PM
+
+Tuesday
+9 AM–8 PM
+
+Wednesday
+9 AM–8 PM
+
+Thursday
+9 AM–8 PM
+
+3. Phone number:+14796929675
+
+4. Email: dont see one for now. Add a placeholder email. 
+
+
+SERVICES
+5. What services do they offer? (haircuts, fades, beard trims, straight razor shaves, etc.): all of the above. 
+
+6. Do you have pricing, or just say "ask for pricing"?: just create some pricing  for now. Would update if client bought the site. 
+
+
+BOOKING
+7. Appointments, walk-ins, or both?: add a placeholder form. 
+
+8. Online booking link (Booksy, Square, etc.)?: dont have one right now 
+
+STYLE & BRAND
+9. What's the vibe? (classic barber, modern/sleek, rugged/Viking-themed, other): I want a classy feel. Not to fancy that I cant read text jsut classy. 
+
+10. Brand colors (if any): main colors would be a really dark matt gray and gold accents. 
+
+11. Logo or photos available?:
+
+
+PAGES
+12. Single landing page, or multiple pages (Home, Services, About, Contact)?: home, services, contact, and photos. 
+
+
+SOCIAL MEDIA
+13. Instagram handle:
+
+14. Facebook page:https://www.facebook.com/profile.php?id=61578067344121
+
+15. Any other social accounts:
+
+
+ANYTHING ELSE
+16. Anything else to know about the business or what Kennedy wants on the site?: jsut letting you know I dont have all the information for this client. I am building this to present to the client so keep that in mind. 
