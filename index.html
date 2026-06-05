@@ -1035,13 +1035,14 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .nav-phone { display: none; }
+      .nav-phone { display: block; font-size: 0.72rem; }
       .hamburger { display: flex; }
       nav { padding: 0 1.25rem; }
 
       .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-      .about-photo-wrap img { height: 300px; object-position: center 20%; }
-      .about-photo-wrap::before { display: none; }
+      .about-photo-wrap { margin: 10px 10px 0 10px; }
+      .about-photo-wrap img { height: 320px; object-position: center 20%; }
+      .about-photo-wrap::before { top: -10px; left: -10px; right: 10px; bottom: 10px; }
 
       .svc-cards { grid-template-columns: 1fr; }
       .hgp-grid { grid-template-columns: 1fr 1fr; }
@@ -1080,10 +1081,6 @@
   </ul>
 
   <div class="nav-right">
-    <div class="lang-toggle">
-      <button class="lang-btn active btn-en" onclick="setLang('en')">EN</button>
-      <button class="lang-btn btn-es"        onclick="setLang('es')">ES</button>
-    </div>
     <a href="tel:+14796929675" class="nav-phone">(479) 692-9675</a>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1123,7 +1120,7 @@
   <section class="about">
     <div class="about-inner container">
       <div class="about-photo-wrap reveal">
-        <img src="./assets/haircut6.jpeg" alt="Vikingo's — precision fade">
+        <img src="./assets/main page pic.jpeg" alt="Vikingo's — precision fade">
       </div>
       <div class="about-body">
         <span class="eyebrow" data-key="about_eyebrow">About the Shop</span>
