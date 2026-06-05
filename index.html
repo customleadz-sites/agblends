@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
   <title>Vikingo's Barber Shop — Russellville, AR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -141,6 +142,66 @@
       text-decoration: none;
     }
 
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 6px;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--gold);
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(15,15,15,0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.18);
+      padding: 1.5rem 2rem 2rem;
+      z-index: 99;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--charcoal-bdr);
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:last-of-type { border-bottom: none; }
+
+    .mobile-menu a:hover,
+    .mobile-menu a.active { color: var(--gold); }
+
     /* ── PAGE ROUTING ── */
     .page { display: none; min-height: 100vh; }
     .page.active { display: block; }
@@ -256,6 +317,23 @@
       transform: translateY(-2px);
     }
 
+    /* ── SVG ICONS ── */
+    .svc-svg {
+      width: 36px;
+      height: 36px;
+      color: var(--gold);
+      display: block;
+      margin: 0 auto 1rem;
+    }
+
+    .svc-svg-sm {
+      width: 30px;
+      height: 30px;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.9rem;
+    }
+
     /* ── SCROLL REVEAL ── */
     .reveal {
       opacity: 0;
@@ -288,7 +366,6 @@
         var(--charcoal);
     }
 
-    /* thin gold top line */
     .hero::before {
       content: '';
       position: absolute;
@@ -296,6 +373,22 @@
       transform: translateX(-50%);
       width: 1px; height: 70px;
       background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    /* Hero lang toggle */
+    .hero-lang {
+      display: flex;
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      animation: fadeUp 1s 0.05s both;
+    }
+
+    .hero-lang .lang-btn {
+      padding: 0.4rem 1rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
     }
 
     .hero-logo {
@@ -386,12 +479,11 @@
       width: 100%;
       height: 440px;
       object-fit: cover;
-      object-position: top center;
+      object-position: center top;
       display: block;
       filter: brightness(0.88) saturate(0.9);
     }
 
-    /* offset gold border frame */
     .about-photo-wrap::before {
       content: '';
       position: absolute;
@@ -470,12 +562,6 @@
       border-bottom-color: var(--gold);
     }
 
-    .svc-icon {
-      font-size: 1.75rem;
-      display: block;
-      margin-bottom: 1rem;
-    }
-
     .svc-name {
       font-family: 'Cinzel', serif;
       font-size: 0.82rem;
@@ -490,6 +576,82 @@
       font-size: 0.84rem;
       color: var(--muted);
       line-height: 1.7;
+    }
+
+    /* Home photo preview strip */
+    .home-gallery-preview {
+      padding: 5rem 2.5rem 0;
+    }
+
+    .home-gallery-preview .section-label-center {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    .hgp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hgp-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 3/4;
+    }
+
+    .hgp-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.55s ease, filter 0.35s ease;
+      filter: brightness(0.85);
+    }
+
+    .hgp-item:hover img {
+      transform: scale(1.04);
+      filter: brightness(1);
+    }
+
+    .hgp-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(17,17,17,0);
+      transition: background 0.35s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hgp-item:hover .hgp-overlay {
+      background: rgba(17,17,17,0.35);
+    }
+
+    .hgp-zoom {
+      color: var(--gold);
+      font-size: 1.5rem;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 0.28s;
+    }
+
+    .hgp-item:hover .hgp-zoom {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hgp-footer {
+      text-align: center;
+      padding: 2.5rem 0 4rem;
     }
 
     /* CTA Banner */
@@ -531,23 +693,20 @@
       padding: 0 2.5rem 3rem;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 1px;
-      background: var(--charcoal-bdr);
+      gap: 1.5rem;
     }
 
     .svc-full-card {
-      background: var(--charcoal-mid);
+      background: transparent;
       padding: 2.4rem;
-      border-bottom: 2px solid transparent;
+      border: 1px solid rgba(201,168,76,0.25);
       transition: all 0.28s;
     }
 
     .svc-full-card:hover {
-      background: var(--charcoal-card);
-      border-bottom-color: var(--gold);
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.03);
     }
-
-    .svc-full-icon { font-size: 1.4rem; display: block; margin-bottom: 0.9rem; }
 
     .svc-full-name {
       font-family: 'Cinzel', serif;
@@ -868,24 +1027,39 @@
       letter-spacing: 0.08em;
     }
 
+    .footer-phone {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .about-inner { grid-template-columns: 1fr; }
-      .about-photo-wrap { display: none; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-phone { display: none; }
+      .hamburger { display: flex; }
+      nav { padding: 0 1.25rem; }
+
+      .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-photo-wrap img { height: 300px; object-position: center 20%; }
+      .about-photo-wrap::before { display: none; }
+
       .svc-cards { grid-template-columns: 1fr; }
+      .hgp-grid { grid-template-columns: 1fr 1fr; }
+      .hgp-item { aspect-ratio: 1/1; }
+
       .contact-body { grid-template-columns: 1fr; gap: 3rem; }
       .gallery { columns: 2; }
       .form-row { grid-template-columns: 1fr; }
+      .svc-grid { padding: 0 1.25rem 3rem; gap: 1rem; }
+      .contact-body { padding: 0 1.25rem 4rem; }
+
+      .hero-lang .lang-btn { padding: 0.45rem 1.1rem; }
     }
 
-    @media (max-width: 600px) {
-      nav { padding: 0 1.25rem; }
-      .nav-phone { display: none; }
-      .nav-links { gap: 1.2rem; }
-      .nav-links a { font-size: 0.58rem; }
-      .gallery { columns: 2; }
-      .svc-grid { padding: 0 1.25rem 3rem; }
-      .contact-body { padding: 0 1.25rem 4rem; }
+    @media (max-width: 480px) {
+      .hgp-grid { grid-template-columns: 1fr; }
+      .hgp-item { aspect-ratio: 4/3; }
+      .gallery { columns: 1; }
     }
   </style>
 </head>
@@ -907,17 +1081,34 @@
 
   <div class="nav-right">
     <div class="lang-toggle">
-      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-      <button class="lang-btn"        id="btn-es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn active btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn btn-es"        onclick="setLang('es')">ES</button>
     </div>
     <a href="tel:+14796929675" class="nav-phone">(479) 692-9675</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="goTo('home');closeMenu()"     id="ml-home"     class="active" data-key="nav_home">Home</a>
+  <a onclick="goTo('services');closeMenu()" id="ml-services"             data-key="nav_services">Services</a>
+  <a onclick="goTo('photos');closeMenu()"   id="ml-photos"               data-key="nav_photos">Photos</a>
+  <a onclick="goTo('contact');closeMenu()"  id="ml-contact"              data-key="nav_contact">Contact</a>
+</div>
 
 <!-- ═══════════ HOME ═══════════ -->
 <div class="page active" id="page-home">
 
   <section class="hero">
+    <!-- Language toggle in hero -->
+    <div class="hero-lang">
+      <button class="lang-btn active btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn btn-es"        onclick="setLang('es')">ES</button>
+    </div>
+
     <img src="./assets/logo.png" alt="Vikingo's Barber Shop" class="hero-logo">
     <span class="hero-eyebrow" data-key="hero_eyebrow">Russellville, Arkansas</span>
     <h1 class="hero-name">VIKINGO'S</h1>
@@ -932,7 +1123,7 @@
   <section class="about">
     <div class="about-inner container">
       <div class="about-photo-wrap reveal">
-        <img src="./assets/haircut2.jpeg" alt="Vikingo's barber at work">
+        <img src="./assets/haircut6.jpeg" alt="Vikingo's — precision fade">
       </div>
       <div class="about-body">
         <span class="eyebrow" data-key="about_eyebrow">About the Shop</span>
@@ -966,20 +1157,54 @@
     </div>
     <div class="svc-cards container">
       <div class="svc-card reveal">
-        <span class="svc-icon">✂️</span>
+        <!-- Scissors icon -->
+        <svg class="svc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+          <path d="M20 4L8.12 15.88"/><path d="M14.47 14.48L20 20"/><path d="M8.12 8.12L12 12"/>
+        </svg>
         <div class="svc-name" data-key="p_svc1">Haircuts & Fades</div>
         <p class="svc-desc" data-key="p_svc1_d">Classic cuts, tapers, skin fades — crafted to fit your style perfectly.</p>
       </div>
       <div class="svc-card reveal d1">
-        <span class="svc-icon">🪒</span>
+        <!-- Razor icon -->
+        <svg class="svc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="9" width="20" height="7" rx="1"/>
+          <line x1="6" y1="9" x2="4.5" y2="5"/><line x1="12" y1="9" x2="12" y2="5"/><line x1="18" y1="9" x2="19.5" y2="5"/>
+          <line x1="2" y1="12.5" x2="22" y2="12.5" stroke-width="0.75" stroke-dasharray="2 2"/>
+        </svg>
         <div class="svc-name" data-key="p_svc2">Beard & Shaves</div>
         <p class="svc-desc" data-key="p_svc2_d">Precision beard shaping and traditional straight razor shaves for the refined man.</p>
       </div>
       <div class="svc-card reveal d2">
-        <span class="svc-icon">⚡</span>
+        <!-- Bolt/design icon -->
+        <svg class="svc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
         <div class="svc-name" data-key="p_svc3">Custom Designs</div>
         <p class="svc-desc" data-key="p_svc3_d">Unique line art and hair designs that turn your cut into a personal signature.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- Home photo preview -->
+  <section class="home-gallery-preview">
+    <p class="section-label-center" data-key="photos_eyebrow">Our Work</p>
+    <div class="hgp-grid">
+      <div class="hgp-item reveal" onclick="openLb('./assets/haircut4.jpeg')">
+        <img src="./assets/haircut4.jpeg" alt="Pompadour fade">
+        <div class="hgp-overlay"><span class="hgp-zoom">+</span></div>
+      </div>
+      <div class="hgp-item reveal d1" onclick="openLb('./assets/haircut3.jpeg')">
+        <img src="./assets/haircut3.jpeg" alt="Fade with design">
+        <div class="hgp-overlay"><span class="hgp-zoom">+</span></div>
+      </div>
+      <div class="hgp-item reveal d2" onclick="openLb('./assets/haircut.jpeg')">
+        <img src="./assets/haircut.jpeg" alt="Custom design cut">
+        <div class="hgp-overlay"><span class="hgp-zoom">+</span></div>
+      </div>
+    </div>
+    <div class="hgp-footer">
+      <button class="btn-outline-gold" onclick="goTo('photos')" data-key="home_photos_btn">Photos</button>
     </div>
   </section>
 
@@ -1003,43 +1228,64 @@
 
   <div class="svc-grid">
     <div class="svc-full-card reveal">
-      <span class="svc-full-icon">✂️</span>
+      <svg class="svc-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+        <path d="M20 4L8.12 15.88"/><path d="M14.47 14.48L20 20"/><path d="M8.12 8.12L12 12"/>
+      </svg>
       <div class="svc-full-name" data-key="s1_n">Men's Haircut</div>
       <p class="svc-full-desc" data-key="s1_d">Classic cut with clippers or scissors, includes a clean-up and styling.</p>
       <div class="svc-price">$25 <small data-key="s_up">and up</small></div>
     </div>
     <div class="svc-full-card reveal d1">
-      <span class="svc-full-icon">💈</span>
+      <svg class="svc-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 7h18"/><path d="M3 12h18"/><path d="M5 7V5a1 1 0 011-1h3a1 1 0 011 1v2"/><path d="M14 7V5a1 1 0 011-1h3a1 1 0 011 1v2"/>
+        <path d="M3 12v7a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+      </svg>
       <div class="svc-full-name" data-key="s2_n">Fade</div>
       <p class="svc-full-desc" data-key="s2_d">Skin fade, low fade, mid fade, or high fade — razor sharp and seamless.</p>
       <div class="svc-price">$30 <small data-key="s_up">and up</small></div>
     </div>
     <div class="svc-full-card reveal d2">
-      <span class="svc-full-icon">👦</span>
+      <svg class="svc-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/>
+        <path d="M16 4.5C17.5 5.5 18 7 17 8.5"/>
+      </svg>
       <div class="svc-full-name" data-key="s3_n">Kids' Haircut</div>
       <p class="svc-full-desc" data-key="s3_d">Patient and skilled cuts for kids of all ages. They'll love the result.</p>
       <div class="svc-price">$20 <small data-key="s_up">and up</small></div>
     </div>
     <div class="svc-full-card reveal">
-      <span class="svc-full-icon">🪒</span>
+      <svg class="svc-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="9" width="20" height="7" rx="1"/>
+        <line x1="6" y1="9" x2="4.5" y2="5"/><line x1="12" y1="9" x2="12" y2="5"/><line x1="18" y1="9" x2="19.5" y2="5"/>
+        <line x1="2" y1="12.5" x2="22" y2="12.5" stroke-width="0.75" stroke-dasharray="2 2"/>
+      </svg>
       <div class="svc-full-name" data-key="s4_n">Beard Trim</div>
       <p class="svc-full-desc" data-key="s4_d">Shape, define, and clean up your beard for a polished, well-groomed look.</p>
       <div class="svc-price">$20 <small data-key="s_up">and up</small></div>
     </div>
     <div class="svc-full-card reveal d1">
-      <span class="svc-full-icon">⚗️</span>
+      <svg class="svc-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 20l16-16"/><path d="M4 4l16 16"/>
+        <path d="M8 4h8a2 2 0 012 2v1H6V6a2 2 0 012-2z"/>
+        <path d="M6 7v11a2 2 0 002 2h8a2 2 0 002-2V7"/>
+      </svg>
       <div class="svc-full-name" data-key="s5_n">Straight Razor Shave</div>
       <p class="svc-full-desc" data-key="s5_d">The classic barbershop experience — hot towel, straight razor, smooth finish.</p>
       <div class="svc-price">$35 <small data-key="s_up">and up</small></div>
     </div>
     <div class="svc-full-card reveal d2">
-      <span class="svc-full-icon">✨</span>
+      <svg class="svc-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      </svg>
       <div class="svc-full-name" data-key="s6_n">Cut + Beard Combo</div>
       <p class="svc-full-desc" data-key="s6_d">The full treatment — haircut and beard service bundled together and discounted.</p>
       <div class="svc-price">$40 <small data-key="s_up">and up</small></div>
     </div>
     <div class="svc-full-card reveal">
-      <span class="svc-full-icon">⚡</span>
+      <svg class="svc-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+      </svg>
       <div class="svc-full-name" data-key="s7_n">Custom Design / Line Art</div>
       <p class="svc-full-desc" data-key="s7_d">Artistic line work and custom designs added to any cut.</p>
       <div class="svc-price">$10 <small data-key="s_addon">add-on</small></div>
@@ -1112,8 +1358,6 @@
   </section>
 
   <div class="contact-body">
-
-    <!-- Left: Info -->
     <div>
       <div class="reveal">
         <span class="ci-label" data-key="ci_addr">Address</span>
@@ -1145,10 +1389,8 @@
       </div>
     </div>
 
-    <!-- Right: Form -->
     <div class="booking-form reveal">
       <h3 class="form-title" data-key="form_title">Request an Appointment</h3>
-
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" data-key="f_name">Full Name</label>
@@ -1159,21 +1401,19 @@
           <input type="tel" class="form-input" id="f-phone">
         </div>
       </div>
-
       <div class="form-group">
         <label class="form-label" data-key="f_service">Service</label>
         <select class="form-select" id="f-service">
-          <option value=""   data-key="f_select">Select a service…</option>
-          <option value="cut"   data-key="s1_n">Men's Haircut — $25+</option>
-          <option value="fade"  data-key="s2_n">Fade — $30+</option>
-          <option value="kids"  data-key="s3_n">Kids' Haircut — $20+</option>
-          <option value="beard" data-key="s4_n">Beard Trim — $20+</option>
-          <option value="shave" data-key="s5_n">Straight Razor Shave — $35+</option>
-          <option value="combo" data-key="s6_n">Cut + Beard Combo — $40+</option>
+          <option value=""    data-key="f_select">Select a service…</option>
+          <option value="cut"    data-key="s1_n">Men's Haircut — $25+</option>
+          <option value="fade"   data-key="s2_n">Fade — $30+</option>
+          <option value="kids"   data-key="s3_n">Kids' Haircut — $20+</option>
+          <option value="beard"  data-key="s4_n">Beard Trim — $20+</option>
+          <option value="shave"  data-key="s5_n">Straight Razor Shave — $35+</option>
+          <option value="combo"  data-key="s6_n">Cut + Beard Combo — $40+</option>
           <option value="design" data-key="s7_n">Custom Design — $10+</option>
         </select>
       </div>
-
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" data-key="f_date">Preferred Date</label>
@@ -1184,19 +1424,15 @@
           <input type="time" class="form-input" id="f-time">
         </div>
       </div>
-
       <div class="form-group">
         <label class="form-label" data-key="f_notes">Notes (optional)</label>
         <textarea class="form-textarea" id="f-notes"></textarea>
       </div>
-
       <button class="form-submit" onclick="submitForm()" data-key="f_submit">Send Request</button>
-
       <div class="form-success" id="form-success">
         <p data-key="f_success">✓ &nbsp;Request received! We'll be in touch shortly.</p>
       </div>
     </div>
-
   </div>
 
 </div>
@@ -1204,12 +1440,11 @@
 <!-- ═══════════ FOOTER ═══════════ -->
 <footer>
   <div class="footer-brand">Vikingo's Barber Shop</div>
-  <p class="footer-text">306 S Arkansas Ave, Russellville, AR 72801 &nbsp;·&nbsp; (479) 692-9675</p>
+  <p class="footer-text">306 S Arkansas Ave, Russellville, AR 72801 &nbsp;·&nbsp; <a href="tel:+14796929675" class="footer-phone">(479) 692-9675</a></p>
   <p class="footer-text" style="margin-top:0.4rem;" data-key="footer_copy">© 2025 Vikingo's Barber Shop. All rights reserved.</p>
 </footer>
 
 <script>
-// ── TRANSLATIONS ──────────────────────────────────────────────
 const T = {
   en: {
     nav_home:"Home", nav_services:"Services", nav_photos:"Photos", nav_contact:"Contact",
@@ -1226,6 +1461,7 @@ const T = {
     p_svc1:"Haircuts & Fades", p_svc1_d:"Classic cuts, tapers, skin fades — crafted to fit your style perfectly.",
     p_svc2:"Beard & Shaves",   p_svc2_d:"Precision beard shaping and traditional straight razor shaves for the refined man.",
     p_svc3:"Custom Designs",   p_svc3_d:"Unique line art and hair designs that turn your cut into a personal signature.",
+    home_photos_btn:"Photos",
     cta_title:"Walk-ins Welcome. Appointments Preferred.",
     cta_sub:"Open 7 days a week · 306 S Arkansas Ave, Russellville, AR",
     cta_btn:"Book Now",
@@ -1267,6 +1503,7 @@ const T = {
     p_svc1:"Cortes & Fades",     p_svc1_d:"Cortes clásicos, tapers, skin fades — diseñados para tu estilo.",
     p_svc2:"Barba & Afeitado",   p_svc2_d:"Perfilado de barba y afeitados tradicionales con navaja para el hombre refinado.",
     p_svc3:"Diseños Personalizados", p_svc3_d:"Arte en línea y diseños únicos que convierten tu corte en una firma personal.",
+    home_photos_btn:"Fotos",
     cta_title:"Sin Cita Bienvenido. Con Cita Preferido.",
     cta_sub:"Abierto 7 días a la semana · 306 S Arkansas Ave, Russellville, AR",
     cta_btn:"Reservar Ahora",
@@ -1299,8 +1536,8 @@ let lang = 'en';
 
 function setLang(l) {
   lang = l;
-  document.getElementById('btn-en').classList.toggle('active', l === 'en');
-  document.getElementById('btn-es').classList.toggle('active', l === 'es');
+  document.querySelectorAll('.btn-en').forEach(b => b.classList.toggle('active', l === 'en'));
+  document.querySelectorAll('.btn-es').forEach(b => b.classList.toggle('active', l === 'es'));
   document.documentElement.lang = l;
   document.querySelectorAll('[data-key]').forEach(el => {
     const v = T[l][el.dataset.key];
@@ -1308,20 +1545,32 @@ function setLang(l) {
   });
 }
 
-// ── PAGE NAVIGATION ───────────────────────────────────────────
 function goTo(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => a.classList.remove('active'));
   const pg = document.getElementById('page-' + name);
   const nl = document.getElementById('nl-' + name);
+  const ml = document.getElementById('ml-' + name);
   if (pg) pg.classList.add('active');
   if (nl) nl.classList.add('active');
+  if (ml) ml.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'instant' });
-  setLang(lang); // re-apply translations to newly visible page
+  setLang(lang);
   setTimeout(initReveal, 60);
 }
 
-// ── SCROLL REVEAL ─────────────────────────────────────────────
+function toggleMenu() {
+  const ham = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  ham.classList.toggle('open');
+  menu.classList.toggle('open');
+}
+
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
 function initReveal() {
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -1336,7 +1585,6 @@ function initReveal() {
   });
 }
 
-// ── LIGHTBOX ──────────────────────────────────────────────────
 function openLb(src) {
   document.getElementById('lb-img').src = src;
   document.getElementById('lightbox').classList.add('open');
@@ -1348,7 +1596,6 @@ function closeLb() {
   document.body.style.overflow = '';
 }
 
-// ── FORM ──────────────────────────────────────────────────────
 function submitForm() {
   const name    = document.getElementById('f-name').value.trim();
   const phone   = document.getElementById('f-phone').value.trim();
@@ -1359,11 +1606,9 @@ function submitForm() {
   }
   document.querySelector('.booking-form .form-submit').style.display = 'none';
   document.getElementById('form-success').style.display = 'block';
-  const v = T[lang]['f_success'];
-  document.getElementById('form-success').querySelector('[data-key="f_success"]').textContent = v;
+  document.getElementById('form-success').querySelector('[data-key="f_success"]').textContent = T[lang]['f_success'];
 }
 
-// ── INIT ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   setLang('en');
   initReveal();
