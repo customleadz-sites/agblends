@@ -7,7 +7,7 @@
   <title>A.G. Blends — Russellville, AR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300&family=Permanent+Marker&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -456,6 +456,16 @@
       animation: fadeUp 1s 0.65s both;
     }
 
+    .hero-blessed {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(1.05rem, 2.8vw, 1.55rem);
+      color: var(--gold);
+      opacity: 0.78;
+      margin-top: 2rem;
+      letter-spacing: 0.03em;
+      animation: fadeUp 1s 0.8s both;
+    }
+
     /* About */
     .about {
       background: var(--charcoal-mid);
@@ -745,6 +755,113 @@
       color: var(--muted);
       font-style: italic;
       text-align: center;
+    }
+
+    /* ── SERVICE PAGE TABS ── */
+    .page-tabs-wrap {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    .page-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--charcoal-bdr);
+      margin-bottom: 0;
+    }
+
+    .page-tab {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 0.85rem 1.75rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-bottom: -1px;
+    }
+
+    .page-tab.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    .page-tab:hover:not(.active) { color: var(--text); }
+
+    /* ── STAFF SECTION ── */
+    .staff-grid {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 2.5rem 1rem;
+    }
+
+    .staff-card {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      border: 1px solid rgba(201,168,76,0.25);
+      padding: 3rem;
+      transition: border-color 0.28s;
+    }
+
+    .staff-card:hover { border-color: var(--gold); }
+
+    .staff-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: var(--charcoal-card);
+      border: 1.5px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .staff-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+
+    .staff-role {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .staff-bio {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-top: 1rem;
+      max-width: 380px;
+    }
+
+    .staff-cta { margin-top: 1.75rem; }
+
+    .staff-footer {
+      text-align: center;
+      padding: 2rem 0 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .staff-card { flex-direction: column; text-align: center; gap: 1.5rem; padding: 2rem; }
+      .staff-bio { max-width: 100%; }
+      .page-tabs-wrap { padding: 0 1.25rem; }
     }
 
     /* ══════════════════════════════
@@ -1115,6 +1232,7 @@
       <button class="btn-gold"         onclick="goTo('contact')"  data-key="hero_cta">Book an Appointment</button>
       <button class="btn-outline-gold" onclick="goTo('services')" data-key="hero_view">View Services</button>
     </div>
+    <p class="hero-blessed" data-key="hero_blessed">Get Blessed at A.G. Barbershop</p>
   </section>
 
   <section class="about">
@@ -1223,6 +1341,16 @@
     <p style="color:var(--muted);font-size:0.88rem;" data-key="svc_page_sub">Quality craftsmanship at every price point</p>
   </section>
 
+  <!-- Page Tabs -->
+  <div class="page-tabs-wrap">
+    <div class="page-tabs">
+      <button class="page-tab active" data-tab="services" onclick="switchSvcTab('services')" data-key="tab_services">Services</button>
+      <button class="page-tab"        data-tab="staff"    onclick="switchSvcTab('staff')"    data-key="tab_staff">Staff</button>
+    </div>
+  </div>
+
+  <!-- Services Tab Content -->
+  <div id="svc-services">
   <div class="svc-grid">
     <div class="svc-full-card reveal">
       <svg class="svc-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1323,6 +1451,25 @@
   </div>
 
   <p class="svc-note reveal" data-key="svc_note">* Prices are starting rates and may vary based on hair length and style. Contact us for a quote.</p>
+  </div><!-- /svc-services -->
+
+  <!-- Staff Tab Content -->
+  <div id="svc-staff" style="display:none;">
+    <div class="staff-grid">
+      <div class="staff-card reveal">
+        <div class="staff-avatar">AG</div>
+        <div class="staff-info">
+          <div class="staff-name">Andrew Garcia</div>
+          <div class="staff-role" data-key="staff_ag_role">Barber</div>
+          <div class="gold-bar"></div>
+          <p class="staff-bio" data-key="staff_ag_bio">Bringing precision and passion to every cut. Specializing in fades, custom designs, and beard work.</p>
+          <div class="staff-cta">
+            <button class="btn-gold" onclick="goTo('contact')" data-key="hero_cta">Book an Appointment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /svc-staff -->
 
   <section class="cta-banner">
     <h2 class="cta-title" data-key="cta_title">Walk-ins Welcome. Appointments Preferred.</h2>
@@ -1343,10 +1490,6 @@
   </section>
 
   <div class="gallery">
-    <div class="gallery-item" onclick="openLb('./assets/haircut2.jpeg')">
-      <img src="./assets/haircut2.jpeg" alt="Barber at work">
-      <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
-    </div>
     <div class="gallery-item" onclick="openLb('./assets/haircut6.jpeg')">
       <img src="./assets/haircut6.jpeg" alt="Fade haircut">
       <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
@@ -1486,6 +1629,7 @@ const T = {
     hero_sub:"Barber Shop",
     hero_tagline:"306 S Arkansas Ave · Precision Cuts & Clean Fades",
     hero_cta:"Book an Appointment", hero_view:"View Services",
+    hero_blessed:"Get Blessed at A.G. Barbershop",
     about_eyebrow:"About the Shop",
     about_title:"Precision Cuts.\nEvery Time.",
     about_p1:"At A.G. Blends, we believe a great haircut is more than a service — it's a statement. Our barbers bring skill, attention to detail, and a passion for the craft to every client who sits in our chair.",
@@ -1525,6 +1669,9 @@ const T = {
     f_notes:"Notes (optional)", f_submit:"Send Request",
     f_success:"✓  Request received! We'll be in touch shortly.",
     footer_copy:"© 2025 A.G. Blends. All rights reserved.",
+    tab_services:"Services", tab_staff:"Staff",
+    staff_ag_role:"Barber",
+    staff_ag_bio:"Bringing precision and passion to every cut. Specializing in fades, custom designs, and beard work.",
   },
   es: {
     nav_home:"Inicio", nav_services:"Servicios", nav_photos:"Fotos", nav_contact:"Contacto",
@@ -1532,6 +1679,7 @@ const T = {
     hero_sub:"Barbería",
     hero_tagline:"306 S Arkansas Ave · Cortes de Precisión & Fades Limpios",
     hero_cta:"Reservar una Cita", hero_view:"Ver Servicios",
+    hero_blessed:"Recibe la Bendición en A.G. Barbershop",
     about_eyebrow:"Sobre Nosotros",
     about_title:"Cortes de Precisión.\nSiempre.",
     about_p1:"En A.G. Blends creemos que un buen corte es más que un servicio — es una declaración. Nuestros barberos aportan habilidad, atención al detalle y pasión a cada cliente que se sienta en nuestra silla.",
@@ -1571,6 +1719,9 @@ const T = {
     f_notes:"Notas (opcional)", f_submit:"Enviar Solicitud",
     f_success:"✓  ¡Solicitud recibida! Nos pondremos en contacto pronto.",
     footer_copy:"© 2025 A.G. Blends. Todos los derechos reservados.",
+    tab_services:"Servicios", tab_staff:"Personal",
+    staff_ag_role:"Barbero",
+    staff_ag_bio:"Precisión y pasión en cada corte. Especialista en fades, diseños personalizados y trabajo con barba.",
   }
 };
 
@@ -1587,6 +1738,12 @@ function setLang(l) {
   });
 }
 
+function switchSvcTab(tab) {
+  document.querySelectorAll('#page-services .page-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  document.getElementById('svc-services').style.display = tab === 'services' ? '' : 'none';
+  document.getElementById('svc-staff').style.display    = tab === 'staff'    ? '' : 'none';
+}
+
 function goTo(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => a.classList.remove('active'));
@@ -1597,6 +1754,7 @@ function goTo(name) {
   if (nl) nl.classList.add('active');
   if (ml) ml.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'instant' });
+  if (name === 'services') switchSvcTab('services');
   setLang(lang);
   setTimeout(initReveal, 60);
 }
