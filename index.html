@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
-  <title>A.G. Blends — Russellville, AR</title>
+  <title>Your Barber Shop</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:ital,wght@0,300;0,400;0,700;1,300&family=Permanent+Marker&display=swap" rel="stylesheet">
@@ -391,10 +391,15 @@
       letter-spacing: 0.15em;
     }
 
-    .hero-logo {
+    .hero-logo-placeholder {
       width: 155px;
       height: 155px;
-      object-fit: contain;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.07);
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 2.5rem;
       animation: fadeUp 1s 0.1s both, pulse 4s 1.2s ease-in-out infinite;
     }
@@ -795,9 +800,12 @@
 
     /* ── STAFF SECTION ── */
     .staff-grid {
-      max-width: 720px;
+      max-width: 1050px;
       margin: 0 auto;
       padding: 3rem 2.5rem 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.5rem;
     }
 
     .staff-card {
@@ -1186,8 +1194,11 @@
 <!-- ═══════════ NAV ═══════════ -->
 <nav>
   <div class="nav-brand" onclick="goTo('home')">
-    <img src="./assets/new logo.png" alt="A.G. Blends">
-    <div class="nav-brand-text">A.G.<br>Blends</div>
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+      <path d="M20 4L8.12 15.88"/><path d="M14.47 14.48L20 20"/><path d="M8.12 8.12L12 12"/>
+    </svg>
+    <div class="nav-brand-text">Your<br>Shop</div>
   </div>
 
   <ul class="nav-links">
@@ -1198,7 +1209,7 @@
   </ul>
 
   <div class="nav-right">
-    <a href="tel:+14796929675" class="nav-phone">(479) 692-9675</a>
+    <a href="tel:+15555555555" class="nav-phone">(555) 555-5555</a>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -1223,28 +1234,32 @@
       <button class="lang-btn btn-es"        onclick="setLang('es')">ES</button>
     </div>
 
-    <img src="./assets/new logo.png" alt="A.G. Blends" class="hero-logo">
-    <span class="hero-eyebrow" data-key="hero_eyebrow">Russellville, Arkansas</span>
-    <h1 class="hero-name">A.G. BLENDS</h1>
+    <div class="hero-logo-placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" width="72" height="72">
+        <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+        <path d="M20 4L8.12 15.88"/><path d="M14.47 14.48L20 20"/><path d="M8.12 8.12L12 12"/>
+      </svg>
+    </div>
+    <span class="hero-eyebrow" data-key="hero_eyebrow">[City, State]</span>
+    <h1 class="hero-name">[YOUR SHOP NAME]</h1>
     <p class="hero-sub" data-key="hero_sub">Barber Shop</p>
-    <p class="hero-tagline" data-key="hero_tagline">306 S Arkansas Ave &nbsp;·&nbsp; Style and Quality</p>
+    <p class="hero-tagline" data-key="hero_tagline">[Your Address] &nbsp;·&nbsp; Style and Quality</p>
     <div class="hero-btns">
       <button class="btn-gold"         onclick="goTo('contact')"  data-key="hero_cta">Book an Appointment</button>
       <button class="btn-outline-gold" onclick="goTo('services')" data-key="hero_view">View Services</button>
     </div>
-    <p class="hero-blessed" data-key="hero_blessed">Get Blessed at A.G. Barbershop</p>
   </section>
 
   <section class="about">
     <div class="about-inner container">
       <div class="about-photo-wrap reveal">
-        <img src="./assets/main page pic.jpeg" alt="A.G. Blends — precision fade">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80" alt="Barber at work">
       </div>
       <div class="about-body">
         <span class="eyebrow" data-key="about_eyebrow">About the Shop</span>
         <h2 class="section-title" data-key="about_title">Precision Cuts.<br>Every Time.</h2>
         <div class="gold-bar"></div>
-        <p class="about-p reveal" data-key="about_p1">At A.G. Blends, we believe a great haircut is more than a service — it's a statement. Our barbers bring skill, attention to detail, and a passion for the craft to every client who sits in our chair.</p>
+        <p class="about-p reveal" data-key="about_p1">At [Your Shop Name], we believe a great haircut is more than a service — it's a statement. Our barbers bring skill, attention to detail, and a passion for the craft to every client who sits in our chair.</p>
         <p class="about-p reveal d1" data-key="about_p2">From sharp fades to custom designs, beard work to straight razor shaves — we've got you covered. Walk-ins welcome, appointments preferred.</p>
         <div class="about-stats reveal d2">
           <div>
@@ -1305,16 +1320,16 @@
   <section class="home-gallery-preview">
     <p class="section-label-center" data-key="photos_eyebrow">Our Work</p>
     <div class="hgp-grid">
-      <div class="hgp-item reveal" onclick="openLb('./assets/haircut4.jpeg')">
-        <img src="./assets/haircut4.jpeg" alt="Pompadour fade">
+      <div class="hgp-item reveal" onclick="openLb('https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80')">
+        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80" alt="Barber at work">
         <div class="hgp-overlay"><span class="hgp-zoom">+</span></div>
       </div>
-      <div class="hgp-item reveal d1" onclick="openLb('./assets/haircut3.jpeg')">
-        <img src="./assets/haircut3.jpeg" alt="Fade with design">
+      <div class="hgp-item reveal d1" onclick="openLb('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=80')">
+        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=600&q=80" alt="Fresh fade">
         <div class="hgp-overlay"><span class="hgp-zoom">+</span></div>
       </div>
-      <div class="hgp-item reveal d2" onclick="openLb('./assets/haircut.jpeg')">
-        <img src="./assets/haircut.jpeg" alt="Custom design cut">
+      <div class="hgp-item reveal d2" onclick="openLb('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80')">
+        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=600&q=80" alt="Precision haircut">
         <div class="hgp-overlay"><span class="hgp-zoom">+</span></div>
       </div>
     </div>
@@ -1325,7 +1340,7 @@
 
   <section class="cta-banner">
     <h2 class="cta-title" data-key="cta_title">Walk-ins Welcome. Appointments Preferred.</h2>
-    <p class="cta-sub" data-key="cta_sub">Open 7 days a week · 306 S Arkansas Ave, Russellville, AR</p>
+    <p class="cta-sub" data-key="cta_sub">Open 7 days a week · [Your Address]</p>
     <button class="btn-dark" onclick="goTo('contact')" data-key="cta_btn">Book Now</button>
   </section>
 
@@ -1457,9 +1472,21 @@
   <div id="svc-staff" style="display:none;">
     <div class="staff-grid">
       <div class="staff-card reveal">
-        <div class="staff-avatar">AG</div>
+        <div class="staff-avatar">?</div>
         <div class="staff-info">
-          <div class="staff-name">Andrew Garcia</div>
+          <div class="staff-name">[Insert Employee Name]</div>
+          <div class="staff-role" data-key="staff_ag_role">Barber</div>
+          <div class="gold-bar"></div>
+          <p class="staff-bio" data-key="staff_ag_bio">Bringing precision and passion to every cut. Specializing in fades, custom designs, and beard work.</p>
+          <div class="staff-cta">
+            <button class="btn-gold" onclick="goTo('contact')" data-key="hero_cta">Book an Appointment</button>
+          </div>
+        </div>
+      </div>
+      <div class="staff-card reveal d1">
+        <div class="staff-avatar">?</div>
+        <div class="staff-info">
+          <div class="staff-name">[Insert Employee Name]</div>
           <div class="staff-role" data-key="staff_ag_role">Barber</div>
           <div class="gold-bar"></div>
           <p class="staff-bio" data-key="staff_ag_bio">Bringing precision and passion to every cut. Specializing in fades, custom designs, and beard work.</p>
@@ -1473,7 +1500,7 @@
 
   <section class="cta-banner">
     <h2 class="cta-title" data-key="cta_title">Walk-ins Welcome. Appointments Preferred.</h2>
-    <p class="cta-sub" data-key="cta_sub">Open 7 days a week · 306 S Arkansas Ave, Russellville, AR</p>
+    <p class="cta-sub" data-key="cta_sub">Open 7 days a week · [Your Address]</p>
     <button class="btn-dark" onclick="goTo('contact')" data-key="cta_btn">Book Now</button>
   </section>
 
@@ -1490,24 +1517,24 @@
   </section>
 
   <div class="gallery">
-    <div class="gallery-item" onclick="openLb('./assets/haircut6.jpeg')">
-      <img src="./assets/haircut6.jpeg" alt="Fade haircut">
+    <div class="gallery-item" onclick="openLb('https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1200&q=80')">
+      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80" alt="Barber at work">
       <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
     </div>
-    <div class="gallery-item" onclick="openLb('./assets/haircut4.jpeg')">
-      <img src="./assets/haircut4.jpeg" alt="Pompadour fade">
+    <div class="gallery-item" onclick="openLb('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1200&q=80')">
+      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80" alt="Fresh fade">
       <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
     </div>
-    <div class="gallery-item" onclick="openLb('./assets/haircut3.jpeg')">
-      <img src="./assets/haircut3.jpeg" alt="Fade with design">
+    <div class="gallery-item" onclick="openLb('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=1200&q=80')">
+      <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=800&q=80" alt="Precision cut">
       <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
     </div>
-    <div class="gallery-item" onclick="openLb('./assets/haircut 5.jpeg')">
-      <img src="./assets/haircut 5.jpeg" alt="Textured fade">
+    <div class="gallery-item" onclick="openLb('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1200&q=80')">
+      <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=800&q=80" alt="Barbershop interior">
       <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
     </div>
-    <div class="gallery-item" onclick="openLb('./assets/haircut.jpeg')">
-      <img src="./assets/haircut.jpeg" alt="Custom design cut">
+    <div class="gallery-item" onclick="openLb('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80')">
+      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80" alt="Barber styling">
       <div class="gallery-overlay"><span class="gallery-zoom">+</span></div>
     </div>
   </div>
@@ -1534,15 +1561,15 @@
     <div>
       <div class="reveal">
         <span class="ci-label" data-key="ci_addr">Address</span>
-        <p class="ci-val">306 S Arkansas Ave<br>Russellville, AR 72801</p>
+        <p class="ci-val">[Street Address]<br>[City, State ZIP]</p>
       </div>
       <div class="reveal d1">
         <span class="ci-label" data-key="ci_phone">Phone</span>
-        <p class="ci-val"><a href="tel:+14796929675">(479) 692-9675</a></p>
+        <p class="ci-val"><a href="tel:+15555555555">(555) 555-5555</a></p>
       </div>
       <div class="reveal d1">
         <span class="ci-label" data-key="ci_email">Email</span>
-        <p class="ci-val"><a href="mailto:info@agblends.com">info@agblends.com</a></p>
+        <p class="ci-val"><a href="mailto:your@email.com">your@email.com</a></p>
       </div>
       <div class="reveal d2">
         <span class="ci-label" data-key="ci_hours">Hours</span>
@@ -1558,7 +1585,7 @@
       </div>
       <div class="reveal d3" style="margin-top:1.75rem;">
         <span class="ci-label" data-key="ci_social">Follow Us</span>
-        <a href="https://www.facebook.com/profile.php?id=61578067344121" target="_blank" class="social-link" data-key="fb_lbl">📘 Facebook</a>
+        <a href="#" class="social-link" data-key="fb_lbl">📘 Facebook</a>
       </div>
     </div>
 
@@ -1616,8 +1643,8 @@
 
 <!-- ═══════════ FOOTER ═══════════ -->
 <footer>
-  <div class="footer-brand">A.G. Blends</div>
-  <p class="footer-text">306 S Arkansas Ave, Russellville, AR 72801 &nbsp;·&nbsp; <a href="tel:+14796929675" class="footer-phone">(479) 692-9675</a></p>
+  <div class="footer-brand">[Your Shop Name]</div>
+  <p class="footer-text">[Your Address] &nbsp;·&nbsp; <a href="tel:+15555555555" class="footer-phone">(555) 555-5555</a></p>
   <p class="footer-text" style="margin-top:0.4rem;" data-key="footer_copy">© 2025 A.G. Blends. All rights reserved.</p>
 </footer>
 
@@ -1625,14 +1652,13 @@
 const T = {
   en: {
     nav_home:"Home", nav_services:"Services", nav_photos:"Photos", nav_contact:"Contact",
-    hero_eyebrow:"Russellville, Arkansas",
+    hero_eyebrow:"[City, State]",
     hero_sub:"Barber Shop",
-    hero_tagline:"306 S Arkansas Ave · Precision Cuts & Clean Fades",
+    hero_tagline:"[Your Address] · Precision Cuts & Clean Fades",
     hero_cta:"Book an Appointment", hero_view:"View Services",
-    hero_blessed:"Get Blessed at A.G. Barbershop",
     about_eyebrow:"About the Shop",
     about_title:"Precision Cuts.\nEvery Time.",
-    about_p1:"At A.G. Blends, we believe a great haircut is more than a service — it's a statement. Our barbers bring skill, attention to detail, and a passion for the craft to every client who sits in our chair.",
+    about_p1:"At [Your Shop Name], we believe a great haircut is more than a service — it's a statement. Our barbers bring skill, attention to detail, and a passion for the craft to every client who sits in our chair.",
     about_p2:"From sharp fades to custom designs, beard work to straight razor shaves — we've got you covered. Walk-ins welcome, appointments preferred.",
     stat1:"Days a Week", stat2:"Walk-ins Welcome", stat3:"Satisfaction",
     svc_eyebrow:"What We Do", svc_title:"Our Services",
@@ -1641,7 +1667,7 @@ const T = {
     p_svc3:"Custom Designs",   p_svc3_d:"Unique line art and hair designs that turn your cut into a personal signature.",
     home_photos_btn:"Photos",
     cta_title:"Walk-ins Welcome. Appointments Preferred.",
-    cta_sub:"Open 7 days a week · 306 S Arkansas Ave, Russellville, AR",
+    cta_sub:"Open 7 days a week · [Your Address]",
     cta_btn:"Book Now",
     svc_page_title:"Our Services", svc_page_sub:"Quality craftsmanship at every price point",
     s1_n:"Haircut",                  s1_d:"Detailed haircut with layering and basic fades. Clean finish every time.",
@@ -1668,21 +1694,20 @@ const T = {
     f_select:"Select a service…", f_date:"Preferred Date", f_time:"Preferred Time",
     f_notes:"Notes (optional)", f_submit:"Send Request",
     f_success:"✓  Request received! We'll be in touch shortly.",
-    footer_copy:"© 2025 A.G. Blends. All rights reserved.",
+    footer_copy:"© 2025 [Your Shop Name]. All rights reserved.",
     tab_services:"Services", tab_staff:"Staff",
     staff_ag_role:"Barber",
     staff_ag_bio:"Bringing precision and passion to every cut. Specializing in fades, custom designs, and beard work.",
   },
   es: {
     nav_home:"Inicio", nav_services:"Servicios", nav_photos:"Fotos", nav_contact:"Contacto",
-    hero_eyebrow:"Russellville, Arkansas",
+    hero_eyebrow:"[Ciudad, Estado]",
     hero_sub:"Barbería",
-    hero_tagline:"306 S Arkansas Ave · Cortes de Precisión & Fades Limpios",
+    hero_tagline:"[Tu Dirección] · Cortes de Precisión & Fades Limpios",
     hero_cta:"Reservar una Cita", hero_view:"Ver Servicios",
-    hero_blessed:"Recibe la Bendición en A.G. Barbershop",
     about_eyebrow:"Sobre Nosotros",
     about_title:"Cortes de Precisión.\nSiempre.",
-    about_p1:"En A.G. Blends creemos que un buen corte es más que un servicio — es una declaración. Nuestros barberos aportan habilidad, atención al detalle y pasión a cada cliente que se sienta en nuestra silla.",
+    about_p1:"En [Nombre de Tu Negocio] creemos que un buen corte es más que un servicio — es una declaración. Nuestros barberos aportan habilidad, atención al detalle y pasión a cada cliente que se sienta en nuestra silla.",
     about_p2:"Desde fades perfectos hasta diseños personalizados, trabajo en barba y afeitados con navaja — te tenemos cubierto. Se aceptan sin cita, aunque se prefieren reservas.",
     stat1:"Días a la Semana", stat2:"Sin Cita Bienvenido", stat3:"Satisfacción",
     svc_eyebrow:"Lo Que Hacemos", svc_title:"Nuestros Servicios",
@@ -1691,7 +1716,7 @@ const T = {
     p_svc3:"Diseños Personalizados", p_svc3_d:"Arte en línea y diseños únicos que convierten tu corte en una firma personal.",
     home_photos_btn:"Fotos",
     cta_title:"Sin Cita Bienvenido. Con Cita Preferido.",
-    cta_sub:"Abierto 7 días a la semana · 306 S Arkansas Ave, Russellville, AR",
+    cta_sub:"Abierto 7 días a la semana · [Tu Dirección]",
     cta_btn:"Reservar Ahora",
     svc_page_title:"Nuestros Servicios", svc_page_sub:"Calidad artesanal en cada precio",
     s1_n:"Corte de Cabello",          s1_d:"Corte detallado con capas y fades básicos. Acabado limpio siempre.",
@@ -1718,7 +1743,7 @@ const T = {
     f_select:"Selecciona un servicio…", f_date:"Fecha Preferida", f_time:"Hora Preferida",
     f_notes:"Notas (opcional)", f_submit:"Enviar Solicitud",
     f_success:"✓  ¡Solicitud recibida! Nos pondremos en contacto pronto.",
-    footer_copy:"© 2025 A.G. Blends. Todos los derechos reservados.",
+    footer_copy:"© 2025 [Nombre de Tu Negocio]. Todos los derechos reservados.",
     tab_services:"Servicios", tab_staff:"Personal",
     staff_ag_role:"Barbero",
     staff_ag_bio:"Precisión y pasión en cada corte. Especialista en fades, diseños personalizados y trabajo con barba.",
